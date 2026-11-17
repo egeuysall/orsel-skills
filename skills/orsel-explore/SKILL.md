@@ -31,12 +31,13 @@ post = blog.read_blog_page(slug=blog.list_blog()["slugs"][0])
 - Per section of the site: a read action (`/blog/{slug}`) and a list action (`/blog`).
 - Named pages (`/about`), search when the site has a search form that works with a plain link.
 - POST forms (sign in, sign up, contact, subscribe, comments, settings) as actions with a risk class that wait for approval. They are checked against the form and never submitted while exploring.
-- The site's own OpenAPI 3 document, or WordPress REST routes, when it publishes them.
+- The site's API, which is where create, update and delete come from: an OpenAPI or Swagger 2 document, routes listed in its docs, routes its own JavaScript calls, or the routes of the platform it runs (WordPress, Shopify storefront and cart, Discourse, Mastodon). Reads are checked against a real answer. Writes are described from the route, never run while exploring, take their body as `input.body`, name the secrets they need, and wait for approval.
 
 ## What it does not make (it says so, with the reason)
 
 - Forms behind a captcha, forms that take card or bank details, file uploads, forms that post to another site.
-- Pages drawn by JavaScript, anything behind a login. For those, record the traffic (`orsel import` with a HAR) or use the person's own browser.
+- Pages drawn by JavaScript, anything behind a login. A single-page app with no public API and no documented routes (its marketing site, say) stays read-only: for its real API, record the traffic (`orsel import` with a HAR) or use the person's own browser.
+- Routes found in a site's JavaScript are inferred and unchecked: their input body may need keys the route does not show. Treat a failed first call as information, not a bug in the site.
 
 ## Limits to respect
 
