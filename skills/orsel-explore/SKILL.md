@@ -36,6 +36,7 @@ post = blog.read_blog_page(slug=blog.list_blog()["slugs"][0])
 ## What it does not make (it says so, with the reason)
 
 - Forms behind a captcha, forms that take card or bank details, file uploads, forms that post to another site.
+- Long results: pass `--fields`, `--limit` or `--max-chars` to `act` (MCP: `fields`, `limit`, `maxChars`); what was cut is named in `_shaped`. A read's `content` is Markdown in page order.
 - Pages drawn by JavaScript, anything behind a login. A single-page app with no public API and no documented routes (its marketing site, say) stays read-only: for its real API, record the traffic (`orsel import` with a HAR) or use the person's own browser.
 - Routes found in a site's JavaScript are inferred and unchecked: their input body may need keys the route does not show. Treat a failed first call as information, not a bug in the site.
 

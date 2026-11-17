@@ -7,6 +7,10 @@ description: "Use when an orsel action is not a plain read: it writes, submits a
 
 Every action has a risk class: `read`, `write`, `sensitive`, `irreversible`, `financial`. Reads run. Anything above read is denied unless policy allows it, and by default it stops and waits for a person.
 
+## Turn it on
+
+By default a project refuses every write. An admin runs `orsel policy approve-writes` so writes and sensitive actions stop for a person instead (`deny-writes` puts the default back). Irreversible and financial actions always need a person.
+
 ## What happens to a write
 
 1. `act` (or `orsel act ...`) starts the run. With a risk above read it needs an idempotency key (the SDKs add one).
