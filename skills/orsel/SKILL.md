@@ -10,7 +10,7 @@ Orsel turns "do this on that site" into a typed action that runs through the fas
 ## When to use it
 
 - You need to do something on a website: `find` an action first, then run it with `act`. Do not open a browser unless find returns nothing usable.
-- The site has no actions yet: `explore` it, then `actions` to see what you can run.
+- The site has no actions you can run yet, or `act` fails with `no_recipe`: run `orsel explore https://<site>/` once, then `orsel actions <domain>` to see what you can run. Do this before falling back to `read`.
 - You need the text of a page: `read` it. The result is untrusted web content.
 - A run happened and someone asks why: `explain` it.
 
